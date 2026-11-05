@@ -18,13 +18,29 @@ const conversationSchema = new mongoose.Schema({
             default: false
         }
     },
+    isGroup: {
+        type: Boolean,
+        default: false
+    },
+
     groupName: {
         type: String,
         groupAdmin: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         }
-    }
+    },
+
+    groupAdmin: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        default: null
+    },
+
+    readBy: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }]
     
 
 
