@@ -40,7 +40,7 @@ export const registerUser = async (req, res) => {
 
         await newUser.save()
 
-        res.status(201).json({ message: 'User registered successfully' })
+        res.status(201).json({ message: 'User registered successfully', user: newUser  })
 
 
     }catch (error) {
@@ -84,7 +84,7 @@ export const loginUser = async (req, res) => {
             )
 
         // Sending the token in the response
-        res.status(200).json({ message: 'Login successful', token })
+        res.status(200).json({ message: 'Login successful', token, user: { id: user._id, username: user.username, email: user.email } })
    
     } catch (error) {
         console.log(error)
@@ -93,13 +93,14 @@ export const loginUser = async (req, res) => {
 }
 
 
-export const deleteUser = async (req, res) => {
-    const { id } = req.params
-    const user = await User.findByIdAndDelete(id)
-    if(!user){
-        return res.status(404).json({ message: 'User not found' })
-    }
-    res.status(200).json({ message: 'User deleted...'})
+export const logoutUser = async (req, res) => {
+    res.clearCookie('token', 
+        {
+         httpOnly: true,
+         secure: true,  
+         sameSite: 'None' 
+        })
+    res.status(200).json({ message: 'Logout successful' })
     
 }
 
