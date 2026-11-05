@@ -2,7 +2,7 @@ import express from 'express'
 import 'dotenv/config'
 import cors from 'cors'
 import connectDB from './src/config/db.js'
-
+import userRoutes from './src/routes/user.route.js'
 
 const app = express()
 
@@ -26,7 +26,7 @@ app.use('/api/health', (req, res) => {
 const Port = process.env.PORT || 3000
 
 
-
+app.use('/api/users', userRoutes)
 
 
 app.listen(Port, () => {
