@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 
+
 const messageSchema = new mongoose.Schema({
     sender: {
         type: mongoose.Schema.Types.ObjectId,
@@ -10,6 +11,7 @@ const messageSchema = new mongoose.Schema({
     text: {
         type: String,
         required: true,
+        trim: true
 
     },
     conversationId: {

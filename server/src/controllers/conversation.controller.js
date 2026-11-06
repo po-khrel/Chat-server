@@ -19,7 +19,7 @@ export const getConversations = async (req, res) => {
             })
         }
 
-        const messages = await Message.find({
+        const messages = await Message.findOne({
             conversationId
         }).populate('sender', 'username profilePicture')
           .populate('replyTo')
@@ -46,7 +46,7 @@ export const getConversations = async (req, res) => {
 export const createConversation = async (req, res) => {
     try {
         const { receiverId } = req.body
-        const senderId = req.user.senderId
+        const senderId = req.user.userId
 
         if( !receiverId) {
             return res.status(400).json({
