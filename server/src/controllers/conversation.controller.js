@@ -1,8 +1,6 @@
 import Conversation from '../models/conversation.js'
 import Message from '../models/message.model.js'
 
-
-
 export const getConversations = async (req, res) => {
     try {
         const { conversationId } = req.params
